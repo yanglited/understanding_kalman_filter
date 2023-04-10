@@ -1,0 +1,15 @@
+version: "1"
+services:
+  kalman-filter-experiments:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DISPLAY: $DISPLAY
+    network_mode: "host"
+    volumes:
+      # X11
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $XAUTHORITY:/root/.Xauthority
+      # share code files
+      - ../:/root/:rw

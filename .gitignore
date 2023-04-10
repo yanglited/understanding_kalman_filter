@@ -1,0 +1,10 @@
+*vscode*
+.Xauthority
+.bash_history
+.bashrc
+.cache/
+.dotnet/
+.gitconfig
+.python_history
+.ssh/
+.conda/
