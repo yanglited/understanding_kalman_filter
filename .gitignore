@@ -8,3 +8,4 @@
 .python_history
 .ssh/
 .conda/
+__pycache__
