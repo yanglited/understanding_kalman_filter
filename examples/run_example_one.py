@@ -1,19 +1,22 @@
 #!/usr/bin/env python
 
+import numpy as np
+
+# fmt: off
 import os
 import sys
 PROJECT_ROOT = os.path.abspath(os.path.join(
-                  os.path.dirname(__file__), 
-                  os.pardir)
+    os.path.dirname(__file__),
+    os.pardir)
 )
 sys.path.append(PROJECT_ROOT)
 
-import numpy as np
 import modules.kalman_filter as kalman
+# fmt: on
 
 
 if __name__ == "__main__":
-    print("Running example")
+    print("Running example one")
 
     steps = 10
     true_value = 32
