@@ -90,7 +90,9 @@ $$
 = \left[\frac{1}{\sqrt{2 \pi \frac{\sigma_Z^2\sigma_p^2}{\sigma_p^2 + \sigma_Z^2}}} \exp\left(-\frac{\left(x-\frac{(y\sigma_p^2 + \mu_p\sigma_Z^2)}{\sigma_p^2 + \sigma_Z^2}\right)^2}{2\frac{\sigma_Z^2\sigma_p^2}{\sigma_p^2 + \sigma_Z^2}}\right)\right] \left[\frac{1}{\sqrt{2 \pi(\sigma_p^2 + \sigma_Z^2)}} \exp\left(-\frac{\frac{\sigma_p^2y^2 + \sigma_Z^2\mu_p^2}{\sigma_p^2 + \sigma_Z^2} - \left(\frac{(y\sigma_p^2 + \mu_p\sigma_Z^2)}{\sigma_p^2 + \sigma_Z^2}\right)^2}{2\frac{\sigma_Z^2\sigma_p^2}{\sigma_p^2 + \sigma_Z^2}}\right)\right]
 $$
 
-The above first part is the Gaussian pdf with mean $\mu_{new} = \frac{(y\sigma_p^2 + \mu_p\sigma_Z^2)}{\sigma_p^2 + \sigma_Z^2}$, and variance $\sigma_{new}^2 = \frac{\sigma_Z^2\sigma_p^2}{\sigma_p^2 + \sigma_Z^2}$. The second part of the above is not a function of $x$ and it can be evaluated to a constant when $y=y_0$. Due to normalization, we know
+The above first part is the Gaussian pdf with mean $\mu_{new} = \frac{(y\sigma_p^2 + \mu_p\sigma_Z^2)}{\sigma_p^2 + \sigma_Z^2}$, and variance $\sigma_{new}^2 = \frac{\sigma_Z^2\sigma_p^2}{\sigma_p^2 + \sigma_Z^2}$. The second part of the above is not a function of $x$ and it can be evaluated to a constant when $y=y_0$. 
+
+Due to normalization, we know
 
 $$
 f_Y(y) = \frac{1}{\sqrt{2 \pi(\sigma_p^2 + \sigma_Z^2)}} \exp\left(-\frac{\frac{\sigma_p^2y^2 + \sigma_Z^2\mu_p^2}{\sigma_p^2 + \sigma_Z^2} - \left(\frac{(y\sigma_p^2 + \mu_p\sigma_Z^2)}{\sigma_p^2 + \sigma_Z^2}\right)^2}{2\frac{\sigma_Z^2\sigma_p^2}{\sigma_p^2 + \sigma_Z^2}}\right),
@@ -101,6 +103,8 @@ such that
 $$
 f_{X|Y}(x,y) = \frac{f_{X,Y}(x,y)}{f_Y(y)} = \frac{f_{Y|X}(y,x) f_{X}(x)}{f_Y(y)} = \frac{1}{\sqrt{2 \pi \sigma_{new}^2}} \exp\left(-\frac{\left(x-\mu_{new}\right)^2}{2\sigma_{new}^2}\right).
 $$
+
+<!-- TODO As a result, we know the update rule for the posterior PDF of X is  -->
 
 References:
 1. https://scipy-cookbook.readthedocs.io/items/KalmanFiltering.html
