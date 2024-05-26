@@ -11,7 +11,7 @@ from modules import kalman_filter
 if __name__ == "__main__":
     print("Running example one")
 
-    steps = 20 # number of steps to run 
+    steps = 2000 # number of steps to run 
     true_value = 32 # underlying true value but unknown
 
     measurement_sigma = 10 # measurement noise standard deviation
