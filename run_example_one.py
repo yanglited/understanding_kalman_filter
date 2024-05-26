@@ -10,8 +10,9 @@ from modules import kalman_filter
 
 if __name__ == "__main__":
     print("Running example one")
+    print("This example shows how to use the Kalman filter to estimate a static value")
 
-    steps = 2000 # number of steps to run 
+    steps = 20 # number of steps to run 
     true_value = 32 # underlying true value but unknown
 
     measurement_sigma = 10 # measurement noise standard deviation
