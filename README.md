@@ -16,3 +16,6 @@ Once you are inside the docker container, do:
 (test_env) root@hostname:~#
 ```
 Then you can go into the `examples` folder and run the examples. Read [examples.md](docs/examples.md) for reference.
+
+
+## todo need to completely get rid of conda and use requirements.txt

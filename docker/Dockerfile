@@ -1,13 +1,7 @@
-FROM continuumio/miniconda3
+FROM python:3.11-slim-bullseye
 
-COPY conda_env.yml /
+WORKDIR /app
 
-RUN conda env create -f /conda_env.yml
-RUN rm /conda_env.yml
-RUN conda init bash
-
-WORKDIR /root
-
-
-
-
+COPY ./requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["sleep", "infinity"]
