@@ -11,24 +11,29 @@ from modules import kalman_filter
 if __name__ == "__main__":
     print("Running example one")
 
-    steps = 150
-    true_value = 32
+    steps = 20 # number of steps to run 
+    true_value = 32 # underlying true value but unknown
 
-    measurement_sigma = 10
+    measurement_sigma = 10 # measurement noise standard deviation
     measurement_var = np.square(measurement_sigma)
     measurements = np.random.normal(true_value, measurement_sigma, steps)
 
-    estimate = 50
-    estimate_sigma = 20
-    estimate_var = np.square(estimate_sigma)
+    estimate = 50 # initial estimate
+    prior_sigma = 20
+    prior_var = np.square(prior_sigma)
 
     for n in range(steps):
-        estimate, estimate_var = kalman_filter.update(
-            estimate, estimate_var, measurements[n], measurement_var
+        estimate, prior_var = kalman_filter.update(
+            estimate, prior_var, measurements[n], measurement_var
         )
+        avgy = np.mean(measurements[0:n+1])
         print(
-            f"Run n: {n}, Measurement: {measurements[n]:3.2f}, estimate: {estimate:3.2f}, estimate var: {estimate_var:3.2f}, abs error: {np.abs(true_value - estimate):3.2f} "
+            f"n: {n}, "
+            f"Y: {measurements[n]:3.2f}, "
+            f"avg(Y): {avgy:3.2f}, "
+            f"E{{X|Y}}: {estimate:3.2f}, "
+            f"prior var: {prior_var:3.2f}, "
+            f"abs error: {np.abs(true_value - estimate):3.2f} "
         )
 
-# TODO: Naive avg:{np.mean(measurements[0:n]):3.2f} print out?
 # TODO: format code
