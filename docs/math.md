@@ -63,6 +63,43 @@ $$
 <!-- TODO As a result, we know the update rule for the posterior PDF of X is  -->
 
 
+## The sum of two Gaussians (the predict step)
+
+Look again at the normalizing constant $f_Y(y)$ above. By construction it is
+
+$$
+f_Y(y) = \int f_{Y|X}(y,x) f_X(x) \thinspace dx = \int f_Z(y-x) f_X(x) \thinspace dx,
+$$
+
+the convolution of the PDFs of $X$ and $Z$, which is the PDF of the sum $Y = X + Z$. We did not
+need to do the integral: the product in the previous section is a Gaussian in $x$ (which
+integrates to one) times $f_Y(y)$, so $f_Y(y)$ is whatever was left over. Simplifying its
+exponent, the two terms combine as
+
+$$
+\frac{\sigma_p^2y^2 + \sigma_Z^2\mu_p^2}{\sigma_p^2 + \sigma_Z^2} - \left(\frac{y\sigma_p^2 + \mu_p\sigma_Z^2}{\sigma_p^2 + \sigma_Z^2}\right)^2
+= \frac{\sigma_p^2\sigma_Z^2 (y-\mu_p)^2}{(\sigma_p^2 + \sigma_Z^2)^2},
+$$
+
+so that
+
+$$
+f_Y(y) = \frac{1}{\sqrt{2 \pi(\sigma_p^2 + \sigma_Z^2)}} \exp\left(-\frac{(y-\mu_p)^2}{2(\sigma_p^2 + \sigma_Z^2)}\right).
+$$
+
+**The sum of two independent Gaussians is Gaussian: the means add and the variances add.**
+This is the whole predict step. If the state moves by a known amount $v$ plus Gaussian motion
+noise of variance $\sigma_w^2$, then
+
+$$
+\mu \leftarrow \mu + v, \qquad \sigma^2 \leftarrow \sigma^2 + \sigma_w^2 .
+$$
+
+Together with the update rule from the previous section, this is the complete one-dimensional
+Kalman filter: **predict** (means add, variances add), then **update** (the posterior from Bayes'
+rule). Example two below puts the two steps together.
+
+
 ## Example One:
 
 Random variable $X$ takes one value and does not move. We keep making observations on $X$ with observation noise. Goal is to estimate the true hidden value of $X$.
@@ -80,3 +117,42 @@ References:
 2. [Kalman filters: a step-by-step implementation guide in Python](https://medium.com/analytics-vidhya/kalman-filters-a-step-by-step-implementation-guide-in-python-91e7e123b968)
 3. [Garima13a/Kalman-Filters](https://github.com/Garima13a/Kalman-Filters)
 4. [Product of two Gaussian PDFs is a Gaussian PDF (Math.SE)](https://math.stackexchange.com/questions/1112866/product-of-two-gaussian-pdfs-is-a-gaussian-pdf-but-product-of-two-gaussian-vari)
+
+
+## Example Two:
+
+$X$ now moves in a straight line: $X_n = X_{n-1} + v + W_n$, where the speed $v$ is known and
+$W_n \sim \mathcal{N}(0, \sigma_w^2)$ is a small random disturbance to the motion. We observe
+$Y_n = X_n + Z_n$ as before. Each step is a predict followed by an update:
+
+$$
+\text{predict:}\quad \mu \leftarrow \mu + v,\quad \sigma^2 \leftarrow \sigma^2 + \sigma_w^2
+\qquad\qquad
+\text{update:}\quad \mu \leftarrow \frac{\mu \sigma_Z^2 + y_n \sigma^2}{\sigma^2 + \sigma_Z^2},\quad
+\sigma^2 \leftarrow \frac{\sigma^2 \sigma_Z^2}{\sigma^2 + \sigma_Z^2}
+$$
+
+Run it with `uv run example_two.py`, or open the
+[interactive plot](https://yanglited.github.io/understanding_kalman_filter/example_two.html).
+
+![Example two](example_two.png)
+
+Two things to notice:
+
+1. A plain running average has no predict step, so it lags further behind the moving value at
+   every step. The filter stays on the line because it moves its estimate by $v$ before looking
+   at the measurement.
+2. The uncertainty no longer shrinks to zero. Every predict adds $\sigma_w^2$ and every update
+   takes some away, and the two balance at a steady state $\sigma_\infty^2$ that solves
+
+$$
+\sigma_\infty^2 = \frac{(\sigma_\infty^2 + \sigma_w^2)\thinspace \sigma_Z^2}{\sigma_\infty^2 + \sigma_w^2 + \sigma_Z^2}
+\quad\Longrightarrow\quad
+\sigma_\infty^4 + \sigma_w^2\thinspace \sigma_\infty^2 - \sigma_w^2\thinspace \sigma_Z^2 = 0 .
+$$
+
+With the defaults $\sigma_w = 1$ and $\sigma_Z = 15$ this gives $\sigma_\infty^2 \approx 14.5$,
+i.e. $\sigma_\infty \approx 3.8$, which is the floor the lower panel settles on.
+
+Next step: when the speed is *not* known, the state becomes the pair (position, velocity) and the
+same two steps are written with matrices. That is the Kalman filter as it is usually presented.
