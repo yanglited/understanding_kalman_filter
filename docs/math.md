@@ -67,7 +67,13 @@ $$
 
 Random variable $X$ takes one value and does not move. We keep making observations on $X$ with observation noise. Goal is to estimate the true hidden value of $X$.
 
-Run it with `uv run run_example_one.py` from the repo root.
+Run it with `uv run example_one.py` from the repo root, or open the
+[interactive plot](https://yanglited.github.io/understanding_kalman_filter/example_one.html).
+
+![Example one](example_one.png)
+
+The code lives in [`kalman_filter.py`](../kalman_filter.py) (the update rule) and
+[`example_one.py`](../example_one.py) (simulation and plot).
 
 References:
 1. [SciPy Cookbook: Kalman filtering](https://scipy-cookbook.readthedocs.io/items/KalmanFiltering.html)
