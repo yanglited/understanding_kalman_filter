@@ -45,8 +45,8 @@ def update(prior_mean, prior_var, measurement_mean, measurement_var):
 Two things to notice in the plot:
 
 - The estimate starts at the prior guess (50) and is pulled toward the data within a few steps.
-  Once the prior is forgotten it tracks the plain running average, which is exactly what the math
-  predicts for a constant state.
+  As measurements accumulate the prior's weight fades and the estimate converges to the plain
+  running average, which is what the math predicts for a constant state.
 - Unlike the running average, the filter also reports **how sure it is**: the variance shrinks
   with every measurement, and the shaded band narrows to match.
 

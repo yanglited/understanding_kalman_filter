@@ -71,7 +71,8 @@ $$
 f_Y(y) = \int f_{Y|X}(y,x) f_X(x) \thinspace dx = \int f_Z(y-x) f_X(x) \thinspace dx,
 $$
 
-the convolution of the PDFs of $X$ and $Z$, which is the PDF of the sum $Y = X + Z$. We did not
+the convolution of the PDFs of $X$ and $Z$, which is the PDF of the sum $Y = X + Z$ because $X$
+and $Z$ are independent. We did not
 need to do the integral: the product in the previous section is a Gaussian in $x$ (which
 integrates to one) times $f_Y(y)$, so $f_Y(y)$ is whatever was left over. Simplifying its
 exponent, the two terms combine as
@@ -89,7 +90,7 @@ $$
 
 **The sum of two independent Gaussians is Gaussian: the means add and the variances add.**
 This is the whole predict step. If the state moves by a known amount $v$ plus Gaussian motion
-noise of variance $\sigma_w^2$, then
+noise of variance $\sigma_w^2$, independent of the current estimate, then
 
 $$
 \mu \leftarrow \mu + v, \qquad \sigma^2 \leftarrow \sigma^2 + \sigma_w^2 .
