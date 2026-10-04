@@ -1,6 +1,6 @@
 # Example one: a constant value seen through noise
 
-[code](example.py) · [filter](../../kf/filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/plot.html) · [foundation math](../../docs/gaussians.md)
+[code](example.py) · [filter](../../kf/filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/plot.html) · [belief animation](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/beliefs.html) · [foundation math](../../docs/gaussians.md)
 
 Random variable $X$ takes one value and does not move. We keep making observations on $X$ with
 observation noise. Goal is to estimate the true hidden value of $X$.
@@ -24,7 +24,7 @@ in [`kf/filter.py`](../../kf/filter.py).
 ```bash
 uv run examples/01_constant_value/example.py            # from the repo root
 uv run examples/01_constant_value/example.py --measurement-sigma 25 --estimate 0 --estimate-sigma 5 --seed -1
-uv run examples/01_constant_value/example.py --html plot.html
+uv run examples/01_constant_value/example.py --html plot.html --beliefs-html beliefs.html
 ```
 
 ![Example one: noisy measurements, the Kalman estimate with its 1-sigma band, and the shrinking uncertainty](plot.png)
@@ -36,6 +36,18 @@ uv run examples/01_constant_value/example.py --html plot.html
   running average, which is what the math predicts for a constant state.
 - Unlike the running average, the filter also reports **how sure it is**: the variance shrinks
   with every measurement, and the shaded band narrows to match.
+
+## Watch the belief update
+
+Every step is one application of the update rule above: the prior (orange) and the measurement
+(grey) multiply into the posterior (blue), which is always narrower than either. Press play in the
+[belief animation](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/beliefs.html) to step through all 150 updates.
+
+![Example one: prior, measurement and posterior densities at steps 1, 2, 5 and 20](beliefs.png)
+
+Notice how the measurement curve never changes width, while the prior gets narrower every step.
+By step 20 the prior is already far sharper than any single measurement, so each new measurement
+can only nudge it a little. That is the shrinking band in the tracking plot, seen from the inside.
 
 ## References
 

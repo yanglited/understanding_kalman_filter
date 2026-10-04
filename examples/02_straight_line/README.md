@@ -1,6 +1,6 @@
 # Example two: a value moving in a straight line
 
-[code](example.py) · [filter](../../kf/filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/plot.html) · [foundation math](../../docs/gaussians.md)
+[code](example.py) · [filter](../../kf/filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/plot.html) · [belief animation](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/beliefs.html) · [foundation math](../../docs/gaussians.md)
 
 $X$ now moves in a straight line: $X_n = X_{n-1} + v + W_n$, where the speed $v$ is known and
 $W_n \sim \mathcal{N}(0, \sigma_w^2)$ is a small random disturbance to the motion. We observe
@@ -27,7 +27,7 @@ In code these are the `predict` and `update` functions in [`kf/filter.py`](../..
 ```bash
 uv run examples/02_straight_line/example.py             # from the repo root
 uv run examples/02_straight_line/example.py --motion-sigma 4 --measurement-sigma 5 --seed -1
-uv run examples/02_straight_line/example.py --html plot.html
+uv run examples/02_straight_line/example.py --html plot.html --beliefs-html beliefs.html
 ```
 
 ![Example two: the Kalman estimate tracks the moving value while a running average lags behind](plot.png)
@@ -48,6 +48,19 @@ $$
 
 With the defaults $\sigma_w = 1$ and $\sigma_Z = 15$ this gives $\sigma_\infty^2 \approx 14.5$,
 i.e. $\sigma_\infty \approx 3.8$, which is the floor the lower panel settles on.
+
+## Watch the belief update
+
+Here each step has two halves. Predict shifts the previous posterior (dotted grey) by $v$ and
+widens it into the prior (orange). Update multiplies that prior by the measurement (grey) into
+the new posterior (blue). Press play in the
+[belief animation](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/beliefs.html) to see them alternate.
+
+![Example two: previous posterior, prior, measurement and posterior at steps 1, 2, 10 and 50](beliefs.png)
+
+By step 50 the dotted and orange curves are nearly the same width and the posterior is only a
+little narrower than both. The widening from predict and the narrowing from update have reached
+the balance derived above: the belief is as sharp as it will ever get.
 
 Next step: when the speed is *not* known, the state becomes the pair (position, velocity) and the
 same two steps are written with matrices. That is the Kalman filter as it is usually presented.

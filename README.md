@@ -12,8 +12,8 @@ two functions.
 
 | # | Example | New idea | Read | Run | Look |
 |---|---------|----------|------|-----|------|
-| 1 | [Constant value seen through noise](examples/01_constant_value/) | the **update** step | [math](examples/01_constant_value/README.md#the-math-this-example-uses) · [code](examples/01_constant_value/example.py) | `uv run examples/01_constant_value/example.py` | [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/plot.html) |
-| 2 | [Value moving in a straight line](examples/02_straight_line/) | the **predict** step | [math](examples/02_straight_line/README.md#the-math-this-example-uses) · [code](examples/02_straight_line/example.py) | `uv run examples/02_straight_line/example.py` | [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/plot.html) |
+| 1 | [Constant value seen through noise](examples/01_constant_value/) | the **update** step | [math](examples/01_constant_value/README.md#the-math-this-example-uses) · [code](examples/01_constant_value/example.py) | `uv run examples/01_constant_value/example.py` | [tracking](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/plot.html) · [beliefs](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/beliefs.html) |
+| 2 | [Value moving in a straight line](examples/02_straight_line/) | the **predict** step | [math](examples/02_straight_line/README.md#the-math-this-example-uses) · [code](examples/02_straight_line/example.py) | `uv run examples/02_straight_line/example.py` | [tracking](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/plot.html) · [beliefs](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/beliefs.html) |
 
 The step after that, unknown speed and the matrix form, is outlined at the end of example two.
 
@@ -27,8 +27,9 @@ uv run examples/01_constant_value/example.py    # zero setup: uv fetches numpy +
 pip install -e . && python examples/01_constant_value/example.py
 ```
 
-Every script takes `--help`, `--seed -1` for a fresh random draw, and `--html PATH` to save the
-interactive plot instead of opening a window.
+Every script opens two interactive figures: the tracking plot, and a step-by-step animation of
+the prior, measurement and posterior densities. Each takes `--help`, `--seed -1` for a fresh
+random draw, and `--html PATH` / `--beliefs-html PATH` to save the figures instead of opening them.
 
 ## Foundation math
 
