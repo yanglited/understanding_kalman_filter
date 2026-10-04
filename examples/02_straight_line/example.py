@@ -8,8 +8,8 @@
 Each step is now predict (move the estimate by the known motion, grow its
 uncertainty) followed by update (fold in the noisy measurement).
 
-Run:   uv run example_two.py              (opens an interactive plot)
-       uv run example_two.py --html docs/example_two.html
+Run:   uv run examples/02_straight_line/example.py              (opens an interactive plot)
+       uv run examples/02_straight_line/example.py --html examples/02_straight_line/plot.html
 """
 import argparse
 

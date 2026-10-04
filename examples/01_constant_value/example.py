@@ -5,8 +5,8 @@
 # ///
 """Example one: estimate a constant hidden value from noisy measurements.
 
-Run:   uv run example_one.py              (opens an interactive plot)
-       uv run example_one.py --html docs/example_one.html
+Run:   uv run examples/01_constant_value/example.py              (opens an interactive plot)
+       uv run examples/01_constant_value/example.py --html examples/01_constant_value/plot.html
 """
 import argparse
 

@@ -1,3 +1,9 @@
+# Gaussians: product and sum
+
+The two facts every example in this repo is built on. The **product** of two Gaussians gives the
+Kalman *update* step; the **sum** of two independent Gaussians gives the *predict* step.
+Used by [example one](../examples/01_constant_value/) (update) and
+[example two](../examples/02_straight_line/) (predict and update).
 
 ## Background information on Gaussian PDFs with Bayes Rule:
 
@@ -98,62 +104,4 @@ $$
 
 Together with the update rule from the previous section, this is the complete one-dimensional
 Kalman filter: **predict** (means add, variances add), then **update** (the posterior from Bayes'
-rule). Example two below puts the two steps together.
-
-
-## Example One:
-
-Random variable $X$ takes one value and does not move. We keep making observations on $X$ with observation noise. Goal is to estimate the true hidden value of $X$.
-
-Run it with `uv run example_one.py` from the repo root, or open the
-[interactive plot](https://yanglited.github.io/understanding_kalman_filter/example_one.html).
-
-![Example one](example_one.png)
-
-The code lives in [`kalman_filter.py`](../kalman_filter.py) (the update rule) and
-[`example_one.py`](../example_one.py) (simulation and plot).
-
-References:
-1. [SciPy Cookbook: Kalman filtering](https://scipy-cookbook.readthedocs.io/items/KalmanFiltering.html)
-2. [Kalman filters: a step-by-step implementation guide in Python](https://medium.com/analytics-vidhya/kalman-filters-a-step-by-step-implementation-guide-in-python-91e7e123b968)
-3. [Garima13a/Kalman-Filters](https://github.com/Garima13a/Kalman-Filters)
-4. [Product of two Gaussian PDFs is a Gaussian PDF (Math.SE)](https://math.stackexchange.com/questions/1112866/product-of-two-gaussian-pdfs-is-a-gaussian-pdf-but-product-of-two-gaussian-vari)
-
-
-## Example Two:
-
-$X$ now moves in a straight line: $X_n = X_{n-1} + v + W_n$, where the speed $v$ is known and
-$W_n \sim \mathcal{N}(0, \sigma_w^2)$ is a small random disturbance to the motion. We observe
-$Y_n = X_n + Z_n$ as before. Each step is a predict followed by an update:
-
-$$
-\text{predict:}\quad \mu \leftarrow \mu + v,\quad \sigma^2 \leftarrow \sigma^2 + \sigma_w^2
-\qquad\qquad
-\text{update:}\quad \mu \leftarrow \frac{\mu \sigma_Z^2 + y_n \sigma^2}{\sigma^2 + \sigma_Z^2},\quad
-\sigma^2 \leftarrow \frac{\sigma^2 \sigma_Z^2}{\sigma^2 + \sigma_Z^2}
-$$
-
-Run it with `uv run example_two.py`, or open the
-[interactive plot](https://yanglited.github.io/understanding_kalman_filter/example_two.html).
-
-![Example two](example_two.png)
-
-Two things to notice:
-
-1. A plain running average has no predict step, so it lags further behind the moving value at
-   every step. The filter stays on the line because it moves its estimate by $v$ before looking
-   at the measurement.
-2. The uncertainty no longer shrinks to zero. Every predict adds $\sigma_w^2$ and every update
-   takes some away, and the two balance at a steady state $\sigma_\infty^2$ that solves
-
-$$
-\sigma_\infty^2 = \frac{(\sigma_\infty^2 + \sigma_w^2)\thinspace \sigma_Z^2}{\sigma_\infty^2 + \sigma_w^2 + \sigma_Z^2}
-\quad\Longrightarrow\quad
-\sigma_\infty^4 + \sigma_w^2\thinspace \sigma_\infty^2 - \sigma_w^2\thinspace \sigma_Z^2 = 0 .
-$$
-
-With the defaults $\sigma_w = 1$ and $\sigma_Z = 15$ this gives $\sigma_\infty^2 \approx 14.5$,
-i.e. $\sigma_\infty \approx 3.8$, which is the floor the lower panel settles on.
-
-Next step: when the speed is *not* known, the state becomes the pair (position, velocity) and the
-same two steps are written with matrices. That is the Kalman filter as it is usually presented.
+rule). [Example two](../examples/02_straight_line/) puts the two steps together.
