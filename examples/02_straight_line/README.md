@@ -1,6 +1,6 @@
 # Example two: a value moving in a straight line
 
-[code](example.py) · [filter](kalman_filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/plot.html) · [foundation math](../../docs/gaussians.md)
+[code](example.py) · [filter](../../kf/filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/02_straight_line/plot.html) · [foundation math](../../docs/gaussians.md)
 
 $X$ now moves in a straight line: $X_n = X_{n-1} + v + W_n$, where the speed $v$ is known and
 $W_n \sim \mathcal{N}(0, \sigma_w^2)$ is a small random disturbance to the motion. We observe
@@ -20,7 +20,7 @@ $$
 \sigma^2 \leftarrow \frac{\sigma^2 \sigma_Z^2}{\sigma^2 + \sigma_Z^2}
 $$
 
-[`kalman_filter.py`](kalman_filter.py) in this folder is example one's file plus a `predict` function.
+In code these are the `predict` and `update` functions in [`kf/filter.py`](../../kf/filter.py).
 
 ## Run it
 

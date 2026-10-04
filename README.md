@@ -6,7 +6,9 @@
 
 A step-by-step introduction to Kalman filtering. Each example adds one idea, with the math
 worked out in full and a runnable NumPy implementation you can plot and experiment with.
-Every example folder is self-contained: its own filter, its own script, its own write-up.
+Each example folder holds its script, its write-up and its plots. The filter itself and the
+shared plotting code live in [`kf/`](kf/), so every example reads as a few lines on top of the same
+two functions.
 
 | # | Example | New idea | Read | Run | Look |
 |---|---------|----------|------|-----|------|
@@ -22,7 +24,7 @@ The step after that, unknown speed and the matrix form, is outlined at the end o
 ```bash
 uv run examples/01_constant_value/example.py    # zero setup: uv fetches numpy + plotly
 # or
-pip install numpy plotly && python examples/01_constant_value/example.py
+pip install -e . && python examples/01_constant_value/example.py
 ```
 
 Every script takes `--help`, `--seed -1` for a fresh random draw, and `--html PATH` to save the

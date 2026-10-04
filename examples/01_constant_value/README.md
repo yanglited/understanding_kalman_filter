@@ -1,6 +1,6 @@
 # Example one: a constant value seen through noise
 
-[code](example.py) · [filter](kalman_filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/plot.html) · [foundation math](../../docs/gaussians.md)
+[code](example.py) · [filter](../../kf/filter.py) · [interactive plot](https://yanglited.github.io/understanding_kalman_filter/examples/01_constant_value/plot.html) · [foundation math](../../docs/gaussians.md)
 
 Random variable $X$ takes one value and does not move. We keep making observations on $X$ with
 observation noise. Goal is to estimate the true hidden value of $X$.
@@ -16,8 +16,8 @@ $$
 \sigma_{new}^2 = \frac{\sigma_Z^2\sigma_p^2}{\sigma_p^2 + \sigma_Z^2}
 $$
 
-The posterior becomes the prior for the next measurement. That is the whole of
-[`kalman_filter.py`](kalman_filter.py) in this folder.
+The posterior becomes the prior for the next measurement. In code this is the `update` function
+in [`kf/filter.py`](../../kf/filter.py).
 
 ## Run it
 

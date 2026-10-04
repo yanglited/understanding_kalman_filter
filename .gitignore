@@ -9,3 +9,5 @@
 .ssh/
 .conda/
 __pycache__
+.venv/
+*.egg-info/

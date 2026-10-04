@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "understanding-kalman-filter"
+version = "0.1.0"
+description = "Step-by-step introduction to Kalman filtering with runnable examples"
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.20", "plotly>=5"]
+
+[tool.setuptools]
+packages = ["kf"]
