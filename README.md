@@ -1,18 +1,15 @@
 # understanding_kalman_filter
-Experiments to understand Kalman filter
 
+Experiments to understand the Kalman filter, starting from Bayes' rule on Gaussians.
 
-## How to use the docker experiment environment:
+## Run
+
 ```bash
-$ cd path/to/project/base/dir
-$ cd docker
-$ docker compose build --progress=plain
-$ docker compose run kalman-filter-experiments
+uv run run_example_one.py        # zero setup: uv fetches numpy
+# or
+pip install numpy && python run_example_one.py
 ```
 
-Once you are inside the docker container, do:
-```bash
-(base) root@hostname:~# conda activate test_env
-(test_env) root@hostname:~#
-```
-Then you can go into the `examples` folder and run the examples. Read [examples.md](docs/examples.md) for reference.
+## Read
+
+[docs/examples.md](docs/examples.md) derives the Gaussian update rule step by step and explains each example.
